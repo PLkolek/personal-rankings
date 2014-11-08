@@ -1,14 +1,18 @@
 %p#notice= notice
 
-%p
-  %b Title:
-  = @post.title
-%p
-  %b Content:
-  = @post.content
-%p
-  %b Created at:
-  = @post.created_at
+%h2= @post.title
+%i= @post.created_at
+.post-content= @post.content
+- @post.comments.each do |comment|
+  .comment
+    %i= comment.created_at
+    .comment-content= comment.content
+= form_for [@post, @post.comments.build] do |f|
+  %p
+    = f.label :content
+    %br
+    = f.text_area :content
+  = f.submit
 
 = link_to 'Edit', edit_post_path(@post)
 \|

@@ -1,0 +1,12 @@
+%h2= @post.title
+%i= @post.created_at
+.post-content= @post.content
+- @post.comments.each do |comment|
+  .comment
+    %i= comment.created_at
+    = link_to 'Destroy', [:admin, comment], :method => :delete, :data => { :confirm => 'Are you sure?' }
+    .comment-content= comment.content
+
+= link_to 'Edit', edit_admin_post_path(@post)
+\|
+= link_to 'Back', admin_posts_path

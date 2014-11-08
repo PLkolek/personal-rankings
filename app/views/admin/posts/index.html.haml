@@ -1,0 +1,21 @@
+%h1 Posts
+
+%table
+  %tr
+    %th Title
+    %th Created at
+    %th
+    %th
+    %th
+
+  - @posts.each do |post|
+    %tr
+      %td= post.title
+      %td= post.created_at
+      %td= link_to 'Show', [:admin, post]
+      %td= link_to 'Edit', edit_admin_post_path(post)
+      %td= link_to 'Destroy', [:admin, post], :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Post', new_admin_post_path

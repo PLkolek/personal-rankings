@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :posts
 
   devise_for :users
@@ -59,4 +60,8 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  namespace :admin do
+    get '', to: 'dashboard#index', as: '/'
+  end
 end

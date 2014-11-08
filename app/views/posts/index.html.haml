@@ -1,5 +1,13 @@
-- @posts.each do |post|
-  %h2= link_to post.title, post
-  %i= post.created_at
-  .post-content= post.content
+-if @posts.length>0
+  .jumbotron
+    %h2= link_to @posts[0].title, @posts[0]
+    %i= @posts[0].created_at
+    .post-content= @posts[0].content
+  - @posts.drop(1).each_slice(3) do |row|
+    .row
+      -row.each do |post|
+        .col-xs-4
+          %h2= link_to post.title, post
+          %i= post.created_at
+          .post-content= post.content
 

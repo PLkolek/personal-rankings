@@ -39,4 +39,6 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 gem 'haml-rails'
 gem 'devise'
-
+gem 'bootstrap-sass', '~> 3.3.0'
+gem 'autoprefixer-rails'
+gem 'sprockets-rails'

@@ -13,6 +13,8 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def destroy
+    @category.destroy
+    redirect_to admin_categories_url, notice: 'Category was successfully destroyed.'
   end
 
   def update

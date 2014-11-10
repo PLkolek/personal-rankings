@@ -15,7 +15,7 @@ class Post < ActiveRecord::Base
     value=value.to_i
     posts=Post.order(:rank)
     if posts.length==0 then
-      rank=1
+      self.rank=1
     elsif value>= posts.length then
       self.rank=posts.last.rank+1
     elsif value<=0

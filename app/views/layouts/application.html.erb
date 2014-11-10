@@ -13,9 +13,14 @@
 <p class="alert"><%= alert %></p>
 
 <div class="container">
-
-<%= yield %>
-
+  <div class="row">
+    <div class="col-sm-9">
+      <%= yield %>
+    </div>
+    <div class="col-sm-3">
+      <%= render 'shared/sidebar' %>
+    </div>
+  </div>
 </div>
 
 </body>

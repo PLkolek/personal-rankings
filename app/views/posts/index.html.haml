@@ -5,8 +5,8 @@
     , Category:
     =@posts[0].category.name
     .post-content= @posts[0].content
-  - @posts.drop(1).each_slice(3) do |row|
+  - @posts.drop(1).each_slice(2) do |row|
     .row
       -row.each do |post|
-        .col-sm-4
+        .col-sm-6
           =render post

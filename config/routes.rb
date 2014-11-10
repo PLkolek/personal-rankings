@@ -65,5 +65,6 @@ Rails.application.routes.draw do
     get '', to: 'dashboard#index', as: '/'
     resources :posts
     resources :comments
+    resources :categories
   end
 end

@@ -6,13 +6,16 @@
         - @post.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
+  .form-group
     = f.label :title
     = f.text_field :title
-  .field
+  .form-group
     = f.label :content
     = f.text_area :content
-  .field
+  .form-group
+    = f.label :category
+    = f.collection_select :category_id, @categories, :id, :name
+  .form-group
     = f.label :created_at
     = f.datetime_select :created_at
   .actions

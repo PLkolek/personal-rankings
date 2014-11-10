@@ -15,30 +15,30 @@ class Admin::PostsController < ApplicationController
 
   def new
     @post = Post.new
+    set_categories
   end
 
   def edit
+    set_categories
   end
 
   def create
     @post = Post.new(post_params)
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to admin_posts_url, notice: 'Post was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if @post.save
+      redirect_to admin_posts_url, notice: 'Post was successfully created.'
+    else
+      set_categories
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to admin_posts_url, notice: 'Post was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if @post.update(post_params)
+      redirect_to admin_posts_url, notice: 'Post was successfully updated.'
+    else
+      set_categories
+      render :edit
     end
   end
 
@@ -54,7 +54,11 @@ class Admin::PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def set_categories
+    @categories = Category.all
+  end
+
   def post_params
-    params.require(:post).permit(:title, :content, :created_at)
+    params.require(:post).permit(:title, :content, :created_at, :category_id)
   end
 end

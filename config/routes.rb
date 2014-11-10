@@ -1,5 +1,21 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+  get 'categories/index'
+  end
+
+  namespace :admin do
+  get 'categories/destroy'
+  end
+
+  namespace :admin do
+  get 'categories/update'
+  end
+
+  namespace :admin do
+  get 'categories/create'
+  end
+
   resources :posts
 
   devise_for :users

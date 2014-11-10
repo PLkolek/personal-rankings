@@ -16,10 +16,12 @@ class Admin::PostsController < ApplicationController
   def new
     @post = Post.new
     set_categories
+    set_posts_count
   end
 
   def edit
     set_categories
+    set_posts_count
   end
 
   def create
@@ -29,6 +31,7 @@ class Admin::PostsController < ApplicationController
       redirect_to admin_posts_url, notice: 'Post was successfully created.'
     else
       set_categories
+      set_posts_count
       render :new
     end
   end
@@ -38,6 +41,7 @@ class Admin::PostsController < ApplicationController
       redirect_to admin_posts_url, notice: 'Post was successfully updated.'
     else
       set_categories
+      set_posts_count
       render :edit
     end
   end
@@ -58,7 +62,11 @@ class Admin::PostsController < ApplicationController
     @categories = Category.all
   end
 
+  def set_posts_count
+    @posts_count = Post.count
+  end
+
   def post_params
-    params.require(:post).permit(:title, :content, :created_at, :category_id)
+    params.require(:post).permit(:title, :content, :created_at, :category_id, :position)
   end
 end

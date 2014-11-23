@@ -1,5 +1,10 @@
 %h1 New post
-
-= render 'form'
+.row
+  .col-sm-9
+    = render 'form'
+  .col-sm-3
+    = render 'shared/sidebar'
+    %ol#new-items
+      %li#new-item
 
 = link_to 'Back', admin_posts_path

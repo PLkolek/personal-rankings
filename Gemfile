@@ -43,5 +43,5 @@ gem 'bootstrap-sass', '~> 3.3.0'
 gem 'autoprefixer-rails'
 gem 'sprockets-rails'
 gem 'rails_12factor', group: :production
-
+gem 'jquery-ui-rails', '~> 5.0.2'
 

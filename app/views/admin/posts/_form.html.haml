@@ -18,8 +18,6 @@
   .form-group
     = f.label :created_at
     = f.datetime_select :created_at
-  .form-group
-    = f.label :position
-    = f.select :position, (1..@posts_count+1).zip((0..@posts_count))
+  = f.hidden_field :position, :value=>'-1'
   .actions
     = f.submit 'Save'

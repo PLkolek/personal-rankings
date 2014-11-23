@@ -1,4 +1,4 @@
-class Admin::PostsController < ApplicationController
+class Admin::PostsController < Admin::AdminController
   before_action :authenticate_user!
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
@@ -15,11 +15,13 @@ class Admin::PostsController < ApplicationController
 
   def new
     @post = Post.new
+    set_ranking
     set_categories
     set_posts_count
   end
 
   def edit
+    set_ranking
     set_categories
     set_posts_count
   end
@@ -32,6 +34,7 @@ class Admin::PostsController < ApplicationController
     else
       set_categories
       set_posts_count
+      set_ranking
       render :new
     end
   end
@@ -42,6 +45,7 @@ class Admin::PostsController < ApplicationController
     else
       set_categories
       set_posts_count
+      set_ranking
       render :edit
     end
   end
@@ -68,5 +72,9 @@ class Admin::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :content, :created_at, :category_id, :position)
+  end
+
+  def set_ranking
+    @ranking = Post.order(:rank)
   end
 end

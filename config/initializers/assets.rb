@@ -4,5 +4,5 @@
 Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
-# application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
-# Rails.application.config.assets.precompile += %w( search.js )
+# application.js.coffee, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
+Rails.application.config.assets.precompile += %w( Sortable.js posts.js admin/dashboard.js admin/posts.js admin/categories.js)

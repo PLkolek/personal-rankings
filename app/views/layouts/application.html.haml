@@ -1,0 +1,21 @@
+!!! HTML
+%html
+  %head
+    %title PersonalRankings
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag params[:controller]
+    = csrf_meta_tags
+%body
+  %h1 Really cool blog
+  %p.notice
+    = notice
+  %p.alert
+    = alert
+
+.container
+  .row
+    .col-sm-9
+      = yield
+    .col-sm-3
+      = render 'shared/sidebar'

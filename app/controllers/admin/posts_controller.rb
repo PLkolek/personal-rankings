@@ -15,7 +15,7 @@ class Admin::PostsController < Admin::AdminController
 
   def new
     @post = Post.new
-    set_ranking
+    set_main_ranking
     set_categories
     set_posts_count
   end
@@ -28,13 +28,13 @@ class Admin::PostsController < Admin::AdminController
 
   def create
     @post = Post.new(post_params)
-
+    @post.user = current_user
     if @post.save
       redirect_to admin_posts_url, notice: 'Post was successfully created.'
     else
       set_categories
       set_posts_count
-      set_ranking
+      set_main_ranking
       render :new
     end
   end
@@ -45,7 +45,7 @@ class Admin::PostsController < Admin::AdminController
     else
       set_categories
       set_posts_count
-      set_ranking
+      set_main_ranking
       render :edit
     end
   end
@@ -74,7 +74,10 @@ class Admin::PostsController < Admin::AdminController
     params.require(:post).permit(:title, :content, :created_at, :category_id, :position)
   end
 
-  def set_ranking
-    @ranking = Post.order(:rank)
+  def set_category_rankings
+    @category_rankings = Category.all.map {|c| RankingPresenter.new(c.name, c.posts)}
+  end
+  def set_main_ranking
+    @main_ranking = RankingPresenter.new('Wszystko na raz', Post.order(:rank))
   end
 end

@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   has_many :comments
   belongs_to :category
+  belongs_to :user
   validates :category, presence: true
   validates :title, presence: true
   validates :content, presence: true

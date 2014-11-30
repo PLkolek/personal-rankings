@@ -5,7 +5,7 @@ class Admin::PostsController < Admin::AdminController
   respond_to :html
 
   def index
-    @posts = Post.all
+    @posts = Post.where(user: current_user)
     respond_with(@posts)
   end
 
@@ -78,6 +78,6 @@ class Admin::PostsController < Admin::AdminController
     @category_rankings = Category.all.map {|c| RankingPresenter.new(c.name, c.posts)}
   end
   def set_main_ranking
-    @main_ranking = RankingPresenter.new('Wszystko na raz', Post.order(:rank))
+    @main_ranking = RankingPresenter.new('Mój ranking', Post.where(user: current_user).order(:rank))
   end
 end

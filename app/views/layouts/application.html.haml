@@ -16,6 +16,15 @@
 .container
   .row
     .col-sm-9
-      = yield
+      - @category_rankings.each_slice(3) do |cat_ranks|
+        .row
+          -cat_ranks.each do |cat_rank|
+            .col-sm-4
+              =render 'shared/ranking', ranking: cat_rank
+      .row
+        .col-sm-12
+          = yield
     .col-sm-3
-      = render 'shared/sidebar'
+      =render 'shared/ranking', ranking: @main_ranking
+
+

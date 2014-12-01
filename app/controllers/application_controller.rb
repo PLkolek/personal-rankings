@@ -4,9 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_main_ranking, :set_category_rankings
 
+  helper DeviseFormHelper
+
 private
   def set_category_rankings
-    @category_rankings = Category.all.map {|c| RankingPresenter.new(c.name, c.posts)}
+    @category_rankings = Category.all.map {|c| RankingPresenter.new('My'+c.name.downcase, c.posts)}
   end
   def set_main_ranking
     @main_ranking = RankingPresenter.new('Wszystko na raz', Post.order(:rank))

@@ -7,12 +7,33 @@
     = javascript_include_tag params[:controller]
     = csrf_meta_tags
 %body
+  %nav.navbar.navbar-default{:role=> "navigation"}
+    .container-fluid
+      .collapse.navbar-collapse#bs-example-navbar-collapse-1
+        -if not user_signed_in?
+          = form_for resource, as: resource_name, url: session_path(resource_name), :html => {:class=>'navbar-form navbar-right'} do |f|
+            .form-group
+              = f.label :email
+              = f.email_field :email, autofocus: true
+
+            .form-group
+              = f.label :password
+              = f.password_field :password, autocomplete: "off"
+
+            = f.submit "Log in", :class => 'btn btn-sm btn-default'
+            - if devise_mapping.rememberable?
+              .form-group
+                = f.check_box :remember_me
+                = f.label :remember_me
+        -else
+          = button_to('Logout', destroy_user_session_path, :method => :delete, :class => 'navbar-btn navbar-right btn-sm btn-default btn')
+
+
   %h1 Really cool blog
   %p.notice
     = notice
   %p.alert
     = alert
-
 .container
   .row
     .col-sm-9

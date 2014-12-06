@@ -15,9 +15,6 @@
   .form-group
     = f.label :category
     = f.collection_select :category_id, @categories, :id, :name
-  .form-group
-    = f.label :created_at
-    = f.datetime_select :created_at
-  = f.hidden_field :position, :value=>'-1'
+  = f.hidden_field :position, :value=>@post.position
   .actions
     = f.submit 'Save'

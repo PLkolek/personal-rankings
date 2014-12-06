@@ -1,0 +1,9 @@
+%ol#ranking
+  -@main_ranking.items.each_with_index do |post, i|
+    -if i+1==@post.position
+      %li#new-item= post.title
+    -else
+      %li= post.title
+-if @post.position == -1
+  %ol#new-items
+    %li#new-item= @post.title

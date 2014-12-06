@@ -3,13 +3,7 @@
   .col-sm-9
     = render 'form'
   .col-sm-3
-    %ol#ranking
-      -@ranking.each do |post|
-        -if post.id==@post.id
-          %li#new-item= post.title
-        -else
-          %li= post.title
+    = render :partial => 'ranking'
 
-= link_to 'Show', @post
 \|
 = link_to 'Back', admin_posts_path

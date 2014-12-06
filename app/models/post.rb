@@ -2,10 +2,6 @@ class Post < ActiveRecord::Base
   has_many :comments
   belongs_to :category
   belongs_to :user
-  validates :category, presence: true
-  validates :title, presence: true
-  validates :content, presence: true
-  validates :position, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0}
 
   def position
     @position

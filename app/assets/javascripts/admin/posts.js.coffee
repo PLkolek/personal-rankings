@@ -12,7 +12,7 @@ $ ->
       $(ui.placeholder).show(200)
     cancel: 'li:not(#new-item)'
     update: (e, ui) ->
-      $('#post_position').val(ui.item.index())
+      $('#post_form_position').val(ui.item.index())
   );
   $("#ranking").disableSelection();
 
@@ -26,5 +26,5 @@ $ ->
     connectWith: '#ranking'
   );
   $("#new-items").disableSelection();
-  $('#post_title').on('input',  ->
-    $('#new-item').text($('#post_title').val()))
+  $('#post_form_title').on('input',  ->
+    $('#new-item').text($('#post_form_title').val()))

@@ -66,5 +66,7 @@ Rails.application.routes.draw do
     resources :posts
     resources :comments
     resources :categories
+    post 'post', to: 'posts#create', as: :post_forms
+    post 'posts/:id', to: 'posts#update', as: :post_form
   end
 end

@@ -44,4 +44,4 @@ gem 'autoprefixer-rails'
 gem 'sprockets-rails'
 gem 'rails_12factor', group: :production
 gem 'jquery-ui-rails', '~> 5.0.2'
-
+gem 'virtus'

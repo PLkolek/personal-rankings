@@ -19,7 +19,7 @@ class PostForm
   validates :user_id, presence: true
 
   def persisted?
-    id!=nil
+    @id!=nil
   end
 
   def self.fromPost post
@@ -27,7 +27,7 @@ class PostForm
                  title: post.title,
                  content: post.content,
                  category_id: post.category.id,
-                 position: (post.real_position or -1) )
+                 position: (post.position or -1) )
   end
 
 end

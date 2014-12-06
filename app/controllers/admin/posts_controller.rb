@@ -34,6 +34,7 @@ class Admin::PostsController < Admin::AdminController
 
   def update
     create_post_form
+    @post.id=params[:id]
     if save_post.call @post
       redirect_to admin_posts_url, notice: 'Post was successfully updated.'
     else
@@ -58,7 +59,7 @@ private
   end
 
   def post_form_params
-    params.require(:create_post_form).permit(:title, :content, :category_id, :position)
+    params.require(:post_form).permit(:title, :content, :category_id, :position)
   end
 
   def set_main_ranking

@@ -10,11 +10,13 @@ class PostForm
   attribute :content, String
   attribute :category_id, Integer
   attribute :position, Integer, :default=>-1
+  attribute :user_id, Integer
 
   validates :title, presence: true
   validates :content, presence: true
   validates :category_id, presence: true
   validates :position, presence: true, numericality: {greater_than_or_equal_to: 0}
+  validates :user_id, presence: true
 
   def persisted?
     id!=nil

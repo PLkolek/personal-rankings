@@ -24,8 +24,8 @@ class Admin::PostsController < Admin::AdminController
   end
 
   def create
-    @post = PostForm.new(post_form_params)
-    if @post.valid? and create_post
+    create_post_form
+    if save_post.call @post
       redirect_to admin_posts_url, notice: 'Post was successfully created.'
     else
       render_errors :new
@@ -33,8 +33,8 @@ class Admin::PostsController < Admin::AdminController
   end
 
   def update
-    @post = PostForm.new(post_form_params)
-    if @post.valid? and update_post
+    create_post_form
+    if save_post.call @post
       redirect_to admin_posts_url, notice: 'Post was successfully updated.'
     else
       render_errors :edit
@@ -47,18 +47,7 @@ class Admin::PostsController < Admin::AdminController
   end
 
 private
-  def create_post
-    post = Post.new(title: @post.title, content: @post.content, position: @post.position, category_id: @post.category_id)
-    post.user = current_user
-    post.save
-  end
-
-  def update_post
-    post = Post.find(params[:id])
-    post.update(title: @post.title, content: @post.content, position: @post.position, category_id: @post.category_id)
-  end
-
-  def render_errors action
+   def render_errors action
     set_main_ranking
     set_categories
     render action
@@ -69,10 +58,19 @@ private
   end
 
   def post_form_params
-    params.require(:post_form).permit(:title, :content, :category_id, :position)
+    params.require(:create_post_form).permit(:title, :content, :category_id, :position)
   end
 
   def set_main_ranking
     @main_ranking = RankingPresenter.new('Mój ranking', Post.where(user: current_user).order(:rank))
+  end
+
+  def save_post
+    @save_post ||= SavePost.new
+  end
+
+  def create_post_form
+    @post = PostForm.new(post_form_params)
+    @post.user_id=current_user.id
   end
 end

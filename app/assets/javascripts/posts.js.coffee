@@ -5,7 +5,8 @@
 $ ->
   $('#new_comment').submit( (e) ->
     e.preventDefault()
-    $.post('/posts/20/comments', $('#new_comment').serialize(), (comment) ->
+    action = $('#new_comment').attr('action')
+    $.post(action, $('#new_comment').serialize(), (comment) ->
       content = '<div class="comment"><i>'+comment.created_at+'</i>'
       content+= '<div class="comment-content">'+comment.content+'</div></div>'
       if $('.comment').length==0
